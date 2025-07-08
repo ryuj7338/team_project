@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<<<<<<< HEAD
 <mapper namespace="com.example.demo.repository.FaqRepository">
 
 	<select id="findBySimilarQuestion" parameterType="string"
@@ -11,6 +12,14 @@
 		WHERE question LIKE CONCAT('%', #{inputText}, '%')
 		ORDER BY LENGTH(question) DESC
 		LIMIT 1
+=======
+<mapper namespace="com.example.RSW.repository.FaqRepository">
+
+	<select id="findBySimilarQuestion" parameterType="string"
+		resultType="com.example.RSW.vo.Qna">
+		SELECT * FROM Qna
+
+>>>>>>> 7295315 (QnA 수정해야 함)
 	</select>
 
 </mapper>

@@ -3,10 +3,17 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<<<<<<< HEAD
 <mapper namespace="com.example.demo.repository.ReplyRepository">
 
 	<select id="getForPrintReplies"
 		resultType="com.example.demo.vo.Reply">
+=======
+<mapper namespace="com.example.RSW.repository.ReplyRepository">
+
+	<select id="getForPrintReplies"
+		resultType="com.example.RSW.vo.Reply">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT R.*, M.nickname AS extra__writer
 		FROM reply AS R
 		INNER JOIN `member` AS M

@@ -3,10 +3,17 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<<<<<<< HEAD
 <mapper namespace="com.example.demo.repository.BoardRepository">
 
 	<select id="getBoardById" parameterType="int"
 		resultType="com.example.demo.vo.Board">
+=======
+<mapper namespace="com.example.RSW.repository.BoardRepository">
+
+	<select id="getBoardById" parameterType="int"
+		resultType="com.example.RSW.vo.Board">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT *
 		FROM board
 		WHERE id = #{id} AND delStatus = 0

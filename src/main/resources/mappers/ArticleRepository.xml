@@ -3,7 +3,11 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<<<<<<< HEAD
 <mapper namespace="com.example.demo.repository.ArticleRepository">
+=======
+<mapper namespace="com.example.RSW.repository.ArticleRepository">
+>>>>>>> 7295315 (QnA 수정해야 함)
 
 	<insert id="writeArticle" parameterType="map">
 		INSERT INTO article
@@ -83,7 +87,11 @@
 	</select>
 
 	<select id="getForPrintArticle" parameterType="int"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Article">
+=======
+		resultType="com.example.RSW.vo.Article">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
 		INNER JOIN `member` AS M
@@ -93,14 +101,22 @@
 	</select>
 
 	<select id="getArticleById" parameterType="int"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Article">
+=======
+		resultType="com.example.RSW.vo.Article">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT *
 		FROM article
 		WHERE id =#{id}
 	</select>
 
 	<select id="getForPrintArticles"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Article">
+=======
+		resultType="com.example.RSW.vo.Article">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
 		INNER JOIN
@@ -137,7 +153,11 @@
 	</select>
 
 	<select id="getArticles"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Article">
+=======
+		resultType="com.example.RSW.vo.Article">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
 		INNER JOIN `member` AS M

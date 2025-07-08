@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class Qna {
 
 	 private int id;
-	 private String question;
-	 private String answer;
+	 private String title;
+	 private String body;
+	 private String regDate;
+	 private String updateDate;
+	 private int orderNo;
+
 }

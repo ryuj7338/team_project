@@ -25,7 +25,11 @@
 	</select>
 
 	<select id="getMemberByNameAndEmail" parameterType="string"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Member">
+=======
+		resultType="com.example.RSW.vo.Member">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT * FROM `member`
 		WHERE `name` = #{name}
 		AND email =
@@ -33,13 +37,21 @@
 	</select>
 
 	<select id="getMemberByLoginId" parameterType="string"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Member">
+=======
+		resultType="com.example.RSW.vo.Member">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT * FROM `member`
 		WHERE loginId = #{loginId}
 	</select>
 
 	<select id="getMemberById" parameterType="int"
+<<<<<<< HEAD
 		resultType="com.example.demo.vo.Member">
+=======
+		resultType="com.example.RSW.vo.Member">
+>>>>>>> 7295315 (QnA 수정해야 함)
 		SELECT * FROM `member`
 		WHERE id = #{id}
 	</select>

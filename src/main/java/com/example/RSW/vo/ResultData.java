@@ -1,5 +1,6 @@
 package com.example.RSW.vo;
 
+
 import lombok.Getter;
 
 public class ResultData<DT> {

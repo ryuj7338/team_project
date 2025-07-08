@@ -26,6 +26,8 @@ public class Rq {
 	private final HttpSession session;
 
 	private boolean isLogined = false;
+
+	@Getter
 	private int loginedMemberId = 0;
 
 	@Getter
