@@ -205,6 +205,7 @@ INSERT INTO article (regDate, updateDate, title, `body`) VALUES
 
 
 INSERT INTO pet_vaccination (petId, vaccineName, injectionDate, nextDueDate, vetName, notes) VALUES
+
 (1, '혼합백신', '2024-06-01', '2025-06-01', '서울동물병원 김수진', '정기 접종 완료'),
 (2, '광견병백신', '2024-03-20', '2025-03-20', '펫케어동물병원 이준호', '다음 접종 예약 필요'),
 (3, '장염백신', '2024-07-01', '2025-07-01', '행복동물병원 박서연', '컨디션 양호');
