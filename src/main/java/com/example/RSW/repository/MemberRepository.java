@@ -7,7 +7,7 @@ import com.example.RSW.vo.Member;
 @Mapper
 public interface MemberRepository {
 
-	public int doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email);
+	public int doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email, String address);
 
 	public Member getMemberById(int id);
 

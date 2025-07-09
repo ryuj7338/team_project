@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 DROP DATABASE IF EXISTS `aniwell`;
 CREATE DATABASE `aniwell`;
 USE `aniwell`;
@@ -24,7 +23,7 @@ CREATE TABLE MEMBER (
   loginPw CHAR(100) NOT NULL,
   address TEXT NOT NULL,
   authLevel SMALLINT(2) NOT NULL DEFAULT 1 COMMENT '관리자 = 7, 회원 = 1, 수의사 = 3',
-  NAME CHAR(20) NOT NULL,
+  name CHAR(20) NOT NULL,
   nickname CHAR(20) NOT NULL,
   cellphone CHAR(20) NOT NULL,
   email CHAR(20) NOT NULL,

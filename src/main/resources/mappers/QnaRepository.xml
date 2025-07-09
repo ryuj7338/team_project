@@ -3,23 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<<<<<<< HEAD
-<mapper namespace="com.example.demo.repository.FaqRepository">
 
-	<select id="findBySimilarQuestion" parameterType="string"
-		resultType="com.example.demo.vo.Faq">
-		SELECT * FROM faq
-		WHERE question LIKE CONCAT('%', #{inputText}, '%')
-		ORDER BY LENGTH(question) DESC
-		LIMIT 1
-=======
-<mapper namespace="com.example.RSW.repository.FaqRepository">
+<mapper namespace="com.example.RSW.repository.QnaRepository">
 
-	<select id="findBySimilarQuestion" parameterType="string"
-		resultType="com.example.RSW.vo.Qna">
-		SELECT * FROM Qna
+	<insert id="saveUserQna" parameterType="com.example.RSW.vo.Qna">
+		INSERT INTO Qna
+		(memberId, title, `body`, isSecret, isFromUser, isAnswered, isActive, regDate, updateDate)
+		VALUES (#{memberId}, #{title}, #{body}, #{secret}, #{fromUser}, #{answered}, #{active}, NOW(), NOW());
+	</insert>
 
->>>>>>> 7295315 (QnA 수정해야 함)
+	<select id="getFaqList" resultType="com.example.RSW.vo.Qna">
+		SELECT *
+		FROM Qna
+		WHERE isFromUser = FALSE AND isActive = TRUE
+		ORDER BY orderNo ASC
 	</select>
 
 </mapper>

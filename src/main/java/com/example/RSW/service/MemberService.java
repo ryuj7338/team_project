@@ -48,8 +48,8 @@ public class MemberService {
 		memberRepository.modify(actor.getId(), Ut.sha256(tempPassword), null, null, null, null);
 	}
 
-	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
-			String email) {
+	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphone,
+			String email, String address) {
 
 		Member existsMember = getMemberByLoginId(loginId);
 
@@ -66,7 +66,7 @@ public class MemberService {
 
 		loginPw = Ut.sha256(loginPw);
 
-		memberRepository.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
+		memberRepository.doJoin(loginId, loginPw, name, nickname, cellphone, email, address);
 
 		int id = memberRepository.getLastInsertId();
 

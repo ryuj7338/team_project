@@ -3,6 +3,7 @@ package com.example.RSW.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.RSW.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.RSW.interceptor.BeforeActionInterceptor;
-import com.example.RSW.service.ArticleService;
-import com.example.RSW.service.BoardService;
-import com.example.RSW.service.QnaService;
-import com.example.RSW.service.ReplyService;
 import com.example.RSW.util.Ut;
 import com.example.RSW.vo.Article;
 import com.example.RSW.vo.Board;
@@ -39,6 +36,9 @@ public class UsrArticleController {
 	private BoardService boardService;
 
 	@Autowired
+	private ReactionPointService reactionPointService;
+
+	@Autowired
 	private ReplyService replyService;
 
 	@Autowired
@@ -48,26 +48,6 @@ public class UsrArticleController {
 		this.beforeActionInterceptor = beforeActionInterceptor;
 	}
 	
-	@RequestMapping("/usr/article/doQuestion")
-	@ResponseBody
-	public ResultData doQuestion(HttpServletRequest req, String questionText) {
-		Rq rq = (Rq) req.getAttribute("rq");
-
-		if (Ut.isEmptyOrNull(questionText)) {
-			return ResultData.from("F-1", "질문을 입력해주세요.");
-		}
-
-		Qna matchedFaq = qnaService.findMostSimilarFaq(questionText);
-
-		if (matchedFaq == null) {
-			return ResultData.from("F-2", "관련된 정보를 찾을 수 없습니다.");
-		}
-
-		// 게시글 등록
-		articleService.writeArticle(rq.getLoginedMemberId(), questionText, matchedFaq.getAnswer(), "3");
-
-		return ResultData.from("S-1", "성공", "matchedFaq", matchedFaq);
-	}
 
 	@RequestMapping("/usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, int id) {
@@ -144,7 +124,13 @@ public class UsrArticleController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		
+
+		ResultData usersReactionRd = reactionPointService.usersReaction(rq.getLoginedMemberId(), "article", id);
+
+		if (usersReactionRd.isSuccess()) {
+			model.addAttribute("userCanMakeReaction", usersReactionRd.isSuccess());
+		}
+
 //		댓글
 		List<Reply> replies = replyService.getForPrintReplies("article", id);
 
@@ -153,6 +139,11 @@ public class UsrArticleController {
 		model.addAttribute("replies", replies);
 		model.addAttribute("repliesCount", repliesCount);
 
+		model.addAttribute("usersReaction", usersReactionRd.getData1());
+		model.addAttribute("isAlreadyAddGoodRp",
+				reactionPointService.isAlreadyAddGoodRp(rq.getLoginedMemberId(), id, "article"));
+		model.addAttribute("isAlreadyAddBadRp",
+				reactionPointService.isAlreadyAddBadRp(rq.getLoginedMemberId(), id, "article"));
 
 		model.addAttribute("article", article);
 

@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
- PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<<<<<<< HEAD
-<mapper namespace="com.example.demo.repository.ArticleRepository">
-=======
 <mapper namespace="com.example.RSW.repository.ArticleRepository">
->>>>>>> 7295315 (QnA 수정해야 함)
 
 	<insert id="writeArticle" parameterType="map">
 		INSERT INTO article
 		SET
-		regDate = NOW(),
+			regDate = NOW(),
 		updateDate = NOW(),
 		memberId = #{memberId},
-		boardId =
-		#{boardId},
-		title =
-		#{title},
-		`body` = #{body}
+			boardId =
+			#{boardId},
+			title =
+			#{title},
+			`body` = #{body}
 	</insert>
 
 	<delete id="deleteArticle" parameterType="int">
@@ -40,8 +36,38 @@
 	<update id="increaseHitCount" parameterType="int">
 		UPDATE article
 		SET
-		hitCount = hitCount + 1
+			hitCount = hitCount + 1
 		WHERE id = #{id}
+	</update>
+
+	<update id="increaseGoodReactionPoint" parameterType="int">
+		UPDATE
+			article
+		SET
+			goodReactionPoint = goodReactionPoint + 1
+		WHERE id = #{relId}
+	</update>
+
+	<update id="decreaseGoodReactionPoint" parameterType="int">
+		UPDATE
+			article
+		SET goodReactionPoint = goodReactionPoint - 1
+		WHERE id =
+			  #{relId}
+	</update>
+
+	<update id="increaseBadReactionPoint" parameterType="int">
+		UPDATE
+			article
+		SET badReactionPoint = badReactionPoint + 1
+		WHERE id = #{relId}
+	</update>
+
+	<update id="decreaseBadReactionPoint" parameterType="int">
+		UPDATE
+			article
+		SET badReactionPoint = badReactionPoint - 1
+		WHERE id = #{relId}
 	</update>
 
 	<select id="getArticleHitCount" parameterType="int">
@@ -83,45 +109,37 @@
 
 	<select id="getLastInsertId" parameterType="int">
 		SELECT
-		LAST_INSERT_ID()
+			LAST_INSERT_ID()
 	</select>
 
+
 	<select id="getForPrintArticle" parameterType="int"
-<<<<<<< HEAD
-		resultType="com.example.demo.vo.Article">
-=======
-		resultType="com.example.RSW.vo.Article">
->>>>>>> 7295315 (QnA 수정해야 함)
+			resultType="com.example.RSW.vo.Article">
 		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
-		INNER JOIN `member` AS M
-		ON A.memberId = M.id
-		WHERE A.id =
-		#{id}
+				 INNER JOIN `member` AS M
+							ON A.memberId = M.id
+		WHERE A.id = #{id}
 	</select>
 
 	<select id="getArticleById" parameterType="int"
-<<<<<<< HEAD
-		resultType="com.example.demo.vo.Article">
-=======
-		resultType="com.example.RSW.vo.Article">
->>>>>>> 7295315 (QnA 수정해야 함)
+			resultType="com.example.RSW.vo.Article">
 		SELECT *
 		FROM article
 		WHERE id =#{id}
 	</select>
 
 	<select id="getForPrintArticles"
-<<<<<<< HEAD
-		resultType="com.example.demo.vo.Article">
-=======
-		resultType="com.example.RSW.vo.Article">
->>>>>>> 7295315 (QnA 수정해야 함)
-		SELECT A.*, M.nickname AS extra__writer
+			resultType="com.example.RSW.vo.Article">
+		SELECT A.*, M.nickname AS extra__writer, IFNULL(COUNT(R.id),0) AS
+		extra__repliesCount
 		FROM article AS A
 		INNER JOIN
 		`member` AS M
-		ON A.memberId = M.id
+		ON
+		A.memberId = M.id
+		LEFT JOIN `reply` AS R
+		ON A.id = R.relId
 		WHERE 1
 		<if test="boardId != 0">
 			AND boardId = #{boardId}
@@ -145,6 +163,7 @@
 				</otherwise>
 			</choose>
 		</if>
+		GROUP BY A.id
 		ORDER BY A.id
 		DESC
 		<if test="limitFrom >= 0">
@@ -153,17 +172,24 @@
 	</select>
 
 	<select id="getArticles"
-<<<<<<< HEAD
-		resultType="com.example.demo.vo.Article">
-=======
-		resultType="com.example.RSW.vo.Article">
->>>>>>> 7295315 (QnA 수정해야 함)
+			resultType="com.example.RSW.vo.Article">
 		SELECT A.*, M.nickname AS extra__writer
 		FROM article AS A
-		INNER JOIN `member` AS M
-		ON A.memberId = M.id
+				 INNER JOIN `member` AS M
+							ON A.memberId = M.id
 		ORDER BY A.id
-		DESC
+			DESC
+	</select>
+
+	<select id="getGoodRP">SELECT goodReactionPoint
+						   FROM article
+						   WHERE id =
+								 #{relId}
+	</select>
+	<select id="getBadRP">SELECT badReactionPoint
+						  FROM article
+						  WHERE id =
+								#{relId}
 	</select>
 
 </mapper>

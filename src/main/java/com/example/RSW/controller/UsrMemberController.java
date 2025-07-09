@@ -78,7 +78,7 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(HttpServletRequest req, String loginId, String loginPw, String name, String nickname,
-			String cellphoneNum, String email) {
+			String cellphone, String email, String address) {
 
 		if (Ut.isEmptyOrNull(loginId)) {
 			return Ut.jsHistoryBack("F-1", "아이디를 입력해");
@@ -95,7 +95,7 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-4", "닉네임을 입력해");
 
 		}
-		if (Ut.isEmptyOrNull(cellphoneNum)) {
+		if (Ut.isEmptyOrNull(cellphone)) {
 			return Ut.jsHistoryBack("F-5", "전화번호를 입력해");
 
 		}
@@ -103,8 +103,12 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-6", "이메일을 입력해");
 
 		}
+		if (Ut.isEmptyOrNull(address)) {
+			return Ut.jsHistoryBack("F-6", "주소를 입력해");
 
-		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
+		}
+
+		ResultData joinRd = memberService.join(loginId, loginPw, name, nickname, cellphone, email, address);
 
 		if (joinRd.isFail()) {
 			return Ut.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());

@@ -9,11 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Qna {
 
-	 private int id;
-	 private String title;
-	 private String body;
-	 private String regDate;
-	 private String updateDate;
-	 private int orderNo;
-
+    private int id;
+    private String title;
+    private String body;
+    private String regDate;
+    private String updateDate;
+    private int orderNo;
+    private boolean isSecret;
+    private boolean isFromUser;
+    private boolean isAnswered;
+    private int memberId;
+    private boolean isActive;
 }

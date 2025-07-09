@@ -5,7 +5,14 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.RSW.vo.Qna;
 
+import java.util.List;
+
 @Mapper
 public interface QnaRepository {
-    Qna findBySimilarQuestion(@Param("inputText") String inputText);
+
+    List<Qna> getFaqList();
+
+    Qna getQnaById(int id);
+
+    void saveUserQna(Qna qna);
 }
